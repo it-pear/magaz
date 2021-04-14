@@ -1,48 +1,80 @@
 <template>
   <article class="post">
-    <header class="post-header">
-      <div class="post-title">
-        <h1>{{post.title}}</h1>
-        <nuxt-link to="/">
-          <i class="el-icon-back"></i>
-        </nuxt-link>
-      </div>
-      <div class="post-info">
-        <small>
-          <i class="el-icon-time"></i>
-          {{ new Date(post.date).toLocaleString() }}
-        </small>
-        <small>
-          <i class="el-icon-view"></i>
-          {{post.views}}
-        </small>
-      </div>
-      <div class="post-image">
-        <img
-          :src="post.imageUrl"
-          alt="post image"
-        >
-      </div>
-    </header>
-    <main class="post-content">
-      <vue-markdown>{{post.text}}</vue-markdown>
-    </main>
-    <footer>
-      <app-comment-form
-        v-if="canAddComment"
-        @created="createCommentHandler"
-        :postId="post._id"
-      />
+    <el-row type="flex" justify="center">
+      <el-col
+        :xs="12"
+        :sm="12"
+        :md="10" 
+        :lg="10"
+      >
+        <header class="post-header">
+          <div class="post-title">
+            <h1>{{post.title}}</h1>
+            <nuxt-link to="/">
+              <i class="el-icon-back"></i>
+            </nuxt-link>
+          </div>
+          <div class="post-info">
+            <small>
+              <i class="el-icon-time"></i>
+              {{ new Date(post.date).toLocaleString() }}
+            </small>
+            <small>
+              <i class="el-icon-view"></i>
+              {{post.views}}
+            </small>
+          </div>
+          <div class="post-image">
+            <img
+              :src="post.imageUrl"
+              alt="post image"
+            >
+          </div>
+        </header>
+        <main class="post-content">
+          <vue-markdown>{{post.text}}</vue-markdown>
+        </main>
+      </el-col>
+      <el-col
+        :xs="12"
+        :sm="12"
+        :md="3" 
+        :lg="3"
+      >
+        <div>
+          ыфыыыыыыыыыыыыыыыыыыы
+        </div>
+      </el-col>
+    </el-row>
 
-      <div class="comments" v-if="post.comments.length">
-        <app-comment
-          v-for="comment in post.comments"
-          :key="comment._id"
-          :comment="comment"
-        />
-      </div>
-      <div class="text-center" v-else>Комментариев нет</div>
-    </footer>
+    <el-row type="flex" justify="center">
+      <el-col
+        :xs="12"
+        :sm="12"
+        :md="13" 
+        :lg="13"
+      >
+        <br><br>
+        <hr><br><br>
+        <footer>
+          <app-comment-form
+            v-if="canAddComment"
+            @created="createCommentHandler"
+            :postId="post._id"
+          />
+
+          <div class="comments" v-if="post.comments.length">
+            <app-comment
+              v-for="comment in post.comments"
+              :key="comment._id"
+              :comment="comment"
+            />
+          </div>
+          <div class="text-center" v-else>Комментариев нет</div>
+        </footer>
+      </el-col>
+    </el-row>
+    
   </article>
 </template>
 
@@ -83,7 +115,7 @@ export default {
 
 <style lang="scss" scoped>
   .post {
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
   }
 

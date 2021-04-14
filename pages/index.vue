@@ -31,7 +31,7 @@
         />
       </el-col>
     </el-row>
-    {{posts}}
+    
   </div>
 </template>
 
