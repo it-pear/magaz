@@ -39,7 +39,8 @@
             v-for="item in categories"
             :key="item.category"
             :label="item.title"
-            :value="item.slug">
+            :value="item.slug"
+          >
           </el-option>
         </el-select>
       </el-form-item>
@@ -106,6 +107,16 @@ export default {
       }
     }
   },
+  computed: {
+    categoryname() {
+      if (! this.controls.category) {
+        return 'Нет значения';
+      }
+      const value = this.controls.category
+      const selectedOption = this.categories.find(item => item.slug == value)
+      return selectedOption.title
+    }
+  },
   methods: {
     handleImageChange(file, fileLiset) {
       this.image = file.raw
@@ -114,12 +125,13 @@ export default {
       this.$refs.form.validate(async valid => {
         if (valid && this.image) {
           this.loading = true
-
+          
           const formData = {
             title: this.controls.title,
             text: this.controls.text,
             price: this.controls.price,
             category: this.controls.category,
+            categoryname: this.categoryname,
             image: this.image
           }
 

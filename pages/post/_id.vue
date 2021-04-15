@@ -41,8 +41,26 @@
         :md="3" 
         :lg="3"
       >
-        <div>
-          ыфыыыыыыыыыыыыыыыыыыы
+        <div class="aside">
+          <h4>{{post.title}}</h4>
+          <br><br><br>
+          <small>Категория:</small>
+          <b>{{post.categoryname}}</b>
+          <br><br>
+          <small>Цена:</small>
+          <b>{{post.price}} <small>рублей</small></b>
+          <br><br>
+          
+          <el-input
+            placeholder="Please input"
+            v-model="input"
+            :disabled="true">
+          </el-input>
+          <br>
+          <el-button circle> - </el-button>
+          <el-button circle> + </el-button>
+          <br><br>
+          <button>Добавить в корзину</button>
         </div>
       </el-col>
     </el-row>
@@ -100,7 +118,8 @@ export default {
   },
   data() {
     return {
-      canAddComment: true
+      canAddComment: true,
+      input: '1'
     }
   },
   methods: {
@@ -144,6 +163,10 @@ export default {
 
   .post-content {
     margin-bottom: 2rem;
+  }
+
+  .aside{
+    padding-left: 30px;
   }
 </style>
 

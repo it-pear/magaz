@@ -36,7 +36,7 @@ export const actions = {
       throw e
     }
   },
-  async create ({commit}, {title, text, price, category, image}) {
+  async create ({commit}, {title, text, price, category, categoryname, image}) {
 
     try{
       const fd = new FormData()
@@ -45,6 +45,7 @@ export const actions = {
       fd.append('text', text)
       fd.append('price', price)
       fd.append('category', category)
+      fd.append('categoryname', categoryname)
       fd.append('image', image, image.name)
 
       return await this.$axios.$post('/api/post/admin', fd)
@@ -99,28 +100,3 @@ export const actions = {
     }
   }
 }
-
-// export const mutations = {
-//   updateCategory(state, posts) {
-//     state.posts = posts
-//   }
-// },
-
-// export const getters = {
-//   postsCategory() {
-//     return state.posts.filter(post => {
-//       return post.category == 'cats'
-//     })
-//   }
-// }
-
-
-// export const getters = {
-//   async postsCategory(state) {
-//     const res = await this.$axios.$get('/api/post')
-//     const posts = await res.json()
-//     return state.posts.filter(post => {
-//       return post.category == 'salads'
-//     })
-//   }
-// }
