@@ -1,6 +1,8 @@
 <template>
   <article class="post">
     <el-row type="flex" justify="center">
+      <div v-if="cartProducts.length">555555555</div>
+      {{cartProducts}}
       <el-col
         :xs="12"
         :sm="12"
@@ -60,7 +62,7 @@
           <el-button circle> - </el-button>
           <el-button circle> + </el-button>
           <br><br>
-          <button>Добавить в корзину</button>
+          <button @click="addProduct(post)">Добавить в корзину</button>
         </div>
       </el-col>
     </el-row>
@@ -99,6 +101,7 @@
 <script>
 import AppComment from '@/components/main/Comment'
 import AppCommentForm from '@/components/main/CommentForm'
+import {mapGetters} from 'vuex'
 
 export default {
   validate({params}) {
@@ -108,6 +111,11 @@ export default {
     return {
       title: `${this.post.title} | ${process.env.appName}`
     }
+  },
+  computed: {
+    ...mapGetters({
+      cartProducts: 'cart/productsList'
+    })
   },
   async asyncData({store, params}) {
     const post = await store.dispatch('post/fetchById', params.id)
@@ -123,10 +131,18 @@ export default {
     }
   },
   methods: {
+    // ...mapActions([
+    //   'cart/addProduct'
+    // ]),
     createCommentHandler(comment) {
       this.post.comments.unshift(comment)
       this.canAddComment = false
-    }
+    },
+    addProduct(data){
+      this.$store.commit('cart/addProduct', {
+          product: data
+        })
+    },
   },
   components: {AppComment, AppCommentForm}
 }
