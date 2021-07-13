@@ -25,7 +25,15 @@ export const getters = {
 
 export const mutations = {
   addProduct (state, {product}) {
-    state.products.push(product)
+    let index = state.products.findIndex(e => e._id == product._id)
+    if (index == -1) {
+      state.products.push(product)
+      let index1 = state.products.findIndex(e => e._id == product._id)
+      state.products[index1].count = 1
+    } else {
+      let index1 = state.products.findIndex(e => e._id == product._id)
+      state.products[index1].count += 1
+    }
   },
   changeProductQty (state, { productKey, step }) {
     if (step < 0 && state.products[productKey].qty < 2) { // qty can't be less than 1

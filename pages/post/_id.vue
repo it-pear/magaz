@@ -131,17 +131,14 @@ export default {
     }
   },
   methods: {
-    // ...mapActions([
-    //   'cart/addProduct'
-    // ]),
     createCommentHandler(comment) {
       this.post.comments.unshift(comment)
       this.canAddComment = false
     },
     addProduct(data){
       this.$store.commit('cart/addProduct', {
-          product: data
-        })
+        product: data
+      })
     },
   },
   components: {AppComment, AppCommentForm}
