@@ -127,8 +127,12 @@ export default {
   data() {
     return {
       canAddComment: true,
-      input: '1'
+      input: '1',
+      count: 1
     }
+  },
+  mounted(){
+    this.$set(this.post, 'count', 0)
   },
   methods: {
     createCommentHandler(comment) {
@@ -136,6 +140,11 @@ export default {
       this.canAddComment = false
     },
     addProduct(data){
+      this.$store.commit('cart/addProduct', {
+        product: data
+      })
+    },
+    delProduct(data){
       this.$store.commit('cart/addProduct', {
         product: data
       })

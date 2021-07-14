@@ -34,6 +34,7 @@ export default {
       required: true
     }
   },
+  
   methods: {
     openPost() {
       const id = this.post._id
